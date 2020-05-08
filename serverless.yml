@@ -1,0 +1,93 @@
+service:
+    name: aws-cec-chat
+
+plugins:
+    - serverless-webpack
+    - serverless-domain-manager
+
+custom:
+    connectionsTableName: AwsCecChatConnections
+    connectionsTableConnectionIdIndexName: AwsCecChatConnectionsConnectionIdIndex
+    customDomain:
+        domainName: chat.api.greenbuildcode.com
+        basePath: ''
+
+provider:
+    name: aws
+    runtime: nodejs12.x
+    region: eu-west-1
+    memorySize: 128
+    websocketsApiName: aws-cec-chat-ws-api
+    websocketsApiRouteSelectionExpression: $request.body.action
+    iamRoleStatements:
+        -   Effect: Allow
+            Action:
+                - dynamodb:BatchGetItem
+                - dynamodb:DeleteItem
+                - dynamodb:GetItem
+                - dynamodb:PutItem
+                - dynamodb:Query
+                - dynamodb:UpdateItem
+            Resource:
+                Fn::GetAtt:
+                    - ConnectionsDynamoDBTable
+                    - Arn
+        -   Effect: Allow
+            Action:
+                - dynamodb:Query
+                - dynamodb:Scan
+            Resource:
+              { "Fn::Join": [ "/", [
+                { "Fn::GetAtt": ["ConnectionsDynamoDBTable", "Arn" ] }, "index", "AwsCecChatConnectionsConnectionIdIndex"
+              ]]}
+
+    environment:
+        CONNECTIONS_TABLE_NAME: ${self:custom.connectionsTableName}
+        CONNECTIONS_TABLE_CONNECTION_ID_INDEX_NAME: ${self:custom.connectionsTableConnectionIdIndexName}
+
+functions:
+    onConnect:
+        handler: src/connection.connect
+        events:
+            -   websocket: $connect
+    onDisconnect:
+        handler: src/connection.disconnect
+        events:
+            -   websocket: $disconnect
+    joinChat:
+        handler: src/chat.join
+        events:
+            -   websocket: joinChat
+    sendMessage:
+        handler: src/message.send
+        events:
+            -   websocket: $default
+    ping:
+        handler: src/connection.ping
+        events:
+            -   websocket: ping
+
+resources:
+    Resources:
+        ConnectionsDynamoDBTable:
+            Type: AWS::DynamoDB::Table
+            Properties:
+                TableName: ${self:custom.connectionsTableName}
+                AttributeDefinitions:
+                    -   AttributeName: ChatId
+                        AttributeType: S
+                    -   AttributeName: ConnectionId
+                        AttributeType: S
+                KeySchema:
+                    -   AttributeName: ChatId
+                        KeyType: HASH
+                    -   AttributeName: ConnectionId
+                        KeyType: RANGE
+                BillingMode: PAY_PER_REQUEST
+                GlobalSecondaryIndexes:
+                    -   IndexName: ${self:custom.connectionsTableConnectionIdIndexName}
+                        KeySchema:
+                            -   AttributeName: ConnectionId
+                                KeyType: HASH
+                        Projection:
+                            ProjectionType: ALL
