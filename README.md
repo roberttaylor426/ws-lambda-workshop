@@ -2,21 +2,25 @@
 
 ### Exercise 1: Acknowledge a WebSockets connection
 
-In this exercise we'll enable clients to establish a WebSocket (WS) connection. Once connected, we'll send a success message back to the client.
+In this exercise we'll enable clients to establish a [WebSocket](https://en.wikipedia.org/wiki/WebSocket) connection. Once connected, we'll send a success message back to the client.
 
-#### Take a look around
+If you haven't already done so, be sure to following the [prequisite] instructions.
 
-Start by taking a look at the `serverless.yml` file in the project root.
+#### Getting up and running
 
-The first thing you'll notice is a `websocketsApiName` entry under the provider declaration:
+From the terminal run `npm ci` to install project dependencies.
+
+Next navigate to our barebones `serverless.yml` file in the project root.
+
+Start by adding a `websocketsApiName` entry to the provider declaration:
 
 ```yaml
 websocketsApiName: ws-lambda-workshop-api
 ```
 
-This simply tells Serverless that you want API Gateway to create a WebSocket API.
+This simply tells Serverless that you want [API Gateway](https://aws.amazon.com/api-gateway/) to create a WebSocket API.
 
-Next take a look at the single lambda definition:
+Next add the following lambda definition under `functions`:
 
 ```yaml
 onConnect:
@@ -34,9 +38,22 @@ The `$connect` label is a [route](https://docs.aws.amazon.com/apigateway/latest/
 
 It's also possible to add your own routing rules.
 
-Our `onConnect` lambda configuration is telling API Gateway that when a WS client connects to the API, the `connection.onConnect` function should be invoked.
+Our `onConnect` lambda configuration is telling API Gateway that when a WebSocket client connects to the API, the `connection.onConnect` function should be invoked.
 
-Take a look inside `connection.ts` under the `src/` folder and you'll see a rather rudimentary connect handler.
+Take a look inside `connection.ts` under the `src` folder and you'll see a rather rudimentary connection handler.
 
 #### Ship it!
 
+From the terminal run `npx serverless deploy`. Within a couple of minutes you should have a WebSocket API created under API Gateway, and a Lambda deployed to handle connection events.
+
+If you inspect your API by running `aws apigatewayv2 get-apis`, the `ProtocolType` should show you it's a WebSocket.
+
+#### Let's connect!
+
+Using the `ApiEndpoint` property returned from the `get-apis` command, try establishing a WebSocket connection with `wscat`:
+
+```wscat -c wss://<your-api-id>.execute-api.eu-west-1.amazonaws.com/dev```
+
+If everything's worked, you should see a message telling you you've connected. Good job!
+
+If you try to send a message you'll receive an error. We'll address that in the next exercise.
