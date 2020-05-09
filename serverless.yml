@@ -8,5 +8,10 @@ provider:
     runtime: nodejs12.x
     region: eu-west-1
     memorySize: 128
+    websocketsApiName: ws-lambda-workshop-api
 
 functions:
+    onConnect:
+        handler: src/connection.onConnect
+        events:
+            -   websocket: $connect
