@@ -8,6 +8,11 @@ export const onConnect: APIGatewayProxyHandler = async (
         `Connecting! (connection id: ${event.requestContext.connectionId})`
     );
 
+    initApiGatewayManagementApi(event).postToConnection({
+        ConnectionId: event.requestContext.connectionId || '',
+        Data: 'Welcome!'
+    });
+
     return emptyOkResponse;
 };
 
