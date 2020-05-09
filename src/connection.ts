@@ -16,6 +16,11 @@ export const onMessage: APIGatewayProxyHandler = async (
 ) => {
     console.log(`Received message! (message: ${event.body})`)
 
+    await initApiGatewayManagementApi(event).postToConnection({
+        ConnectionId: event.requestContext.connectionId || '',
+        Data: event.body || ''
+    }).promise();
+
     return emptyOkResponse;
 };
 
