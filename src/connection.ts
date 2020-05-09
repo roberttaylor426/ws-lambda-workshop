@@ -11,6 +11,14 @@ export const onConnect: APIGatewayProxyHandler = async (
     return emptyOkResponse;
 };
 
+export const onMessage: APIGatewayProxyHandler = async (
+    event: APIGatewayProxyEvent
+) => {
+    console.log(`Received message! (message: ${event.body})`)
+
+    return emptyOkResponse;
+};
+
 const initApiGatewayManagementApi = (event: APIGatewayProxyEvent) => new ApiGatewayManagementApi({
         apiVersion: '2018-11-29',
         endpoint:

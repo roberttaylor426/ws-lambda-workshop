@@ -1,10 +1,22 @@
 # WebSockets Lambda Workshop
 
-### Exercise 2: Send messages from our Lambda back to the WebSocket client
+### Exercise 2: There and back again
 
-In this exercise we'll send a message from our Lambda back to the WebSocket client.
+In this exercise we'll send a message from our WebSocket client, and then echo the message back to the client with a Lambda.
 
 ![Exercise diagram](exercise-diagram.png)
+
+#### Sending the message from the client
+
+In the previous exercise we already established a WebSocket connection. To send a message over that connection with `wscat` we just need to enter the message at the prompt.
+
+#### Routing messages
+
+In the previous exercise we encountered WebSocket API [routes](https://docs.aws.amazon.com/apigateway/latest/developerguide/websocket-api-develop-routes.html). In this exercise we'll use the `$default`<sup>*</sup> route to direct all non-connect notifications to a new handler.
+
+See if you can update our `serverless.yml` to route `$default` traffic to our `connection.onMessage` handler.
+
+If you were to `npx serverless deploy` now, you should find that it is possible to send messages from the `wscat` client.
 
 #### Identifying the connection
 
@@ -18,14 +30,18 @@ API Gateway makes the unique id for a connection available in the request contex
 
 #### Over to you
 
-Take a look at our existing `onConnect` handler. At the moment a client connects, can you send them back a greeting?
+Take a look at our `onMessage` handler. Can you send them back the same message?
 
-There's an `initApiGatewayManagementApi` function that might be useful, these [docs](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/ApiGatewayManagementApi.html#postToConnection-property) should also help.
+There's a predefined `initApiGatewayManagementApi` function that might be useful. These [docs](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/ApiGatewayManagementApi.html#postToConnection-property) should also help.
+
+(Don't forget `AWS.Request` instances [require a call to `.promise()`](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/using-promises.html) to start the underlying service call).
 
 #### Ship it!
 
-Once you're done, try redeploying your Lambda by running `npx serverless deploy`.
+Once you're done, try redeploying everything (`npx serverless deploy`).
 
-This time when you use `wscat` to connect, you should see your welcome message.
+Next time you try sending a message with `wscat`, you should see it echoed back to you!
 
-Writing to the right connection - that was a rite of passage!
+Nice work writing to the right connection - that was a rite of passage! :grimacing:
+
+<sup>*</sup>: In practice we probably wouldn't use the `$default` route for this, we'd more likely set up a [custom route](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-routes-integrations.html#apigateway-websocket-api-routes-about-custom) using a [route selection expression](https://docs.aws.amazon.com/apigateway/latest/developerguide/websocket-api-develop-routes.html#apigateway-websocket-api-route-selection-expressions).
