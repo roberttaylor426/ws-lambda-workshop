@@ -15,3 +15,7 @@ functions:
         handler: src/connection.onConnect
         events:
             -   websocket: $connect
+    onMessage:
+        handler: src/connection.onMessage
+        events:
+            -   websocket: $default
