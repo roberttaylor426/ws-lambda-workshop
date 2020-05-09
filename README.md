@@ -1,59 +1,31 @@
 # WebSockets Lambda Workshop
 
-### Exercise 1: Setup a WebSockets connection
+### Exercise 2: Send messages from our Lambda back to the WebSocket client
 
-In this exercise we'll enable [WebSocket](https://en.wikipedia.org/wiki/WebSocket) clients to establish connections to [API Gateway](https://aws.amazon.com/api-gateway/). On connection a [Lambda](https://aws.amazon.com/lambda/) will be notified.
+In this exercise we'll send a message from our Lambda back to the WebSocket client.
 
 ![Exercise diagram](exercise-diagram.png)
 
-#### Getting up and running
+#### Identifying the connection
 
-From the terminal run `npm ci` to install project dependencies.
+At any given time a WebSocket API could be maintaining multiple open connections.
 
-Next navigate to our barebones `serverless.yml` file in the project root.
+![Multiple connections diagram](multiple-connections-diagram.png)
 
-Start by adding a `websocketsApiName` entry to the provider declaration:
+In order for our Lambda to send a message to the right recipient, we need to tell API Gateway which connection we want it to forward the message on to.
 
-```yaml
-websocketsApiName: ws-lambda-workshop-api
-```
+API Gateway makes the unique id for a connection available in the request context whenever a Lambda is triggered by a WebSocket event.
 
-This simply tells Serverless that you want API Gateway to provision a [WebSocket API](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api.html).
+#### Over to you
 
-Next add the following Lambda definition under `functions`:
+Take a look at our existing `onConnect` handler. At the moment a client connects, can you send them back a greeting?
 
-```yaml
-onConnect:
-    handler: src/connection.onConnect
-    events:
-        -   websocket: $connect
-```
-
-The `events` block indicates that this Lambda will be invoked by a WebSocket event, namely when a client connects.
-
-The `$connect` label is a [route](https://docs.aws.amazon.com/apigateway/latest/developerguide/websocket-api-develop-routes.html) instruction for API Gateway. There are three predefined routes for API Gateway:
- * `$connect`
- * `$disconnect`
- * `$default`
-
-It's also possible to add your own routing rules.
-
-Our `onConnect` Lambda configuration tells API Gateway that when a WebSocket client connects, the `connection.onConnect` function should be invoked.
-
-Take a look inside `connection.ts` under the `src` folder and you'll see a rudimentary connection handler.
+There's an `initApiGatewayManagementApi` function that might be useful, these [docs](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/ApiGatewayManagementApi.html#postToConnection-property) should also help.
 
 #### Ship it!
 
-From the terminal run `npx serverless deploy`. Within a couple of minutes you should have a WebSocket API created under API Gateway, and a Lambda deployed to handle connection events.
+Once you're done, try redeploying your Lambda by running `npx serverless deploy`.
 
-If you inspect your API using the [aws cli](https://aws.amazon.com/cli/) by running `aws apigatewayv2 get-apis`, the `ProtocolType` should confirm it is indeed a WebSocket API.
+This time when you use `wscat` to connect, you should see your welcome message.
 
-#### Let's connect!
-
-Using the `ApiEndpoint` property returned from the `get-apis` command, try establishing a WebSocket connection with `wscat`:
-
-```wscat -c wss://<your-api-id>.execute-api.eu-west-1.amazonaws.com/dev```
-
-If everything worked, you should see a message telling you you've connected. Good job!
-
-(If you try to send a message from the WebSocket client you'll receive an error. We'll address that in a later exercise).
+Writing to the right connection - that was a rite of passage!
