@@ -1,6 +1,6 @@
 ## Exercise 2: There and back again
 
-In this exercise we'll send a message from our WebSocket client, and then echo the message back to the client with a Lambda.
+In this exercise we'll send a message from our WebSocket client, and then echo the message back to the client over the same connection with a Lambda.
 
 ![Exercise diagram](exercise-diagram.png)
 
