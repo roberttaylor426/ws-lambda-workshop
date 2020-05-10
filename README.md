@@ -21,6 +21,7 @@ This workshop will make use of but not explain:
  * [AWS API Gateway](https://aws.amazon.com/api-gateway/)
  * [AWS Lambda](https://aws.amazon.com/lambda/)
  * [AWS DynamoDb](https://aws.amazon.com/dynamodb/)
+ * [Serverless framework](https://www.serverless.com/)
  
 A basic understanding of these technologies is assumed.
 
