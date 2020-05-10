@@ -29,7 +29,7 @@ onConnect:
 
 The `events` block indicates that this Lambda will be invoked by a WebSocket event, namely when a client connects.
 
-The `$connect` label is a [route](https://docs.aws.amazon.com/apigateway/latest/developerguide/websocket-api-develop-routes.html) instruction for API Gateway. There are three predefined routes for API Gateway:
+The `$connect` label is a [route](https://docs.aws.amazon.com/apigateway/latest/developerguide/websocket-api-develop-routes.html) instruction for API Gateway. There are three predefined routes:
  * `$connect`
  * `$disconnect`
  * `$default`
