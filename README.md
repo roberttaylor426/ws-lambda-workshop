@@ -28,7 +28,7 @@ In order for our Lambda to send a message to the right recipient, we need to tel
 
 API Gateway makes the unique id for a connection available in the request context whenever a Lambda is triggered by a WebSocket event.
 
-### Over to you
+### Over to you :point_down:
 
 Take a look at our `onMessage` handler. Can you have it echo messages back to the client?
 
