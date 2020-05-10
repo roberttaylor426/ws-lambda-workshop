@@ -12,7 +12,7 @@ This we can already do. In the previous exercise we established a WebSocket conn
 
 In the previous exercise we encountered WebSocket API [routes](https://docs.aws.amazon.com/apigateway/latest/developerguide/websocket-api-develop-routes.html). In this exercise we'll use the `$default` route to direct all non-connect notifications to a new handler<sup>1</sup>.
 
-### Over to you
+### Over to you :point_down:
 
 See if you can update our `serverless.yml` to route `$default` traffic to our `connection.onMessage` handler.
 
@@ -36,7 +36,7 @@ There's a predefined `initApiGatewayManagementApi` function that might be useful
 
 (Don't forget `AWS.Request` instances [require a call to `.promise()`](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/using-promises.html) to start the underlying service call).
 
-### Ship it!
+### Ship it! :shipit:
 
 Once you're done, try redeploying everything (`npx serverless deploy`). Next time you try sending a message with `wscat`, you should see it echoed back!
 
