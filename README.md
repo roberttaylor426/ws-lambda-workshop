@@ -42,4 +42,4 @@ Once you're done, try redeploying everything (`npx serverless deploy`). Next tim
 
 Nice work writing to the right connection - that was a rite of passage! :grimacing:
 
-<sup>1</sup>In practice we probably wouldn't use the `$default` route for this, we'd more likely set up a [custom route](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-routes-integrations.html#apigateway-websocket-api-routes-about-custom) using a [route selection expression](https://docs.aws.amazon.com/apigateway/latest/developerguide/websocket-api-develop-routes.html#apigateway-websocket-api-route-selection-expressions).
+<sup>1</sup> In practice we probably wouldn't use the `$default` route for this, we'd more likely set up a [custom route](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-routes-integrations.html#apigateway-websocket-api-routes-about-custom) using a [route selection expression](https://docs.aws.amazon.com/apigateway/latest/developerguide/websocket-api-develop-routes.html#apigateway-websocket-api-route-selection-expressions).
