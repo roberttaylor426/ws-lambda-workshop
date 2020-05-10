@@ -20,7 +20,7 @@ This workshop will make use of but not explain:
 
  * [AWS API Gateway](https://aws.amazon.com/api-gateway/)
  * [AWS Lambda](https://aws.amazon.com/lambda/)
- * [AWS DynamoDb](https://aws.amazon.com/dynamodb/)
+ * [AWS DynamoDB](https://aws.amazon.com/dynamodb/)
  * [Serverless framework](https://www.serverless.com/)
  
 A basic understanding of these technologies is assumed.
@@ -29,7 +29,7 @@ A basic understanding of these technologies is assumed.
 
 Before starting this workshop you'll need the following installed:
 
- * A recent version of [Node](https://nodejs.org/en/) (this workshop was developed and tested with 12.x)
+ * A recent version of [NodeJS](https://nodejs.org/en/) (this workshop was developed and tested with 12.x)
  * [wscat](https://www.npmjs.com/package/wscat) (or another WebSocket client) installed. `npm install -g wscat` will get you up and running
  * [aws cli](https://aws.amazon.com/cli/)
  
