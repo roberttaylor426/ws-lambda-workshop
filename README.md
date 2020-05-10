@@ -1,6 +1,6 @@
 ## WebSocket Lambda Workshop
 
-###TL;DR
+### TL;DR
 
 Install `wscat` (`npm i -g wscat`). Checkout branch `exercise-1`. Have fun!
 
