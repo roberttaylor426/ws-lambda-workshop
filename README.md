@@ -38,7 +38,7 @@ There's a predefined `initApiGatewayManagementApi` function that might be useful
 
 ### Ship it! :shipit:
 
-Once you're done, try redeploying everything (`npx serverless deploy`). Next time you try sending a message with `wscat`, you should see it echoed back!
+Once you're done, try redeploying everything (`npx serverless deploy`). Next time you try sending a message with `wscat`, you should see it echoed back.
 
 Nice work writing to the right connection - that was a rite of passage! :grimacing:
 
