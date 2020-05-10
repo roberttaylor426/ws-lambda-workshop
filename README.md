@@ -1,12 +1,10 @@
-# WebSockets Lambda Workshop
-
-### Exercise 1: Setup a WebSockets connection
+## Exercise 1: Setup a WebSocket connection
 
 In this exercise we'll enable [WebSocket](https://en.wikipedia.org/wiki/WebSocket) clients to establish connections to [API Gateway](https://aws.amazon.com/api-gateway/). On connection a [Lambda](https://aws.amazon.com/lambda/) will be notified.
 
 ![Exercise diagram](exercise-diagram.png)
 
-#### Getting up and running
+### Getting up and running
 
 From the terminal run `npm ci` to install project dependencies.
 
@@ -42,13 +40,13 @@ Our `onConnect` Lambda configuration tells API Gateway that when a WebSocket cli
 
 Take a look inside `connection.ts` under the `src` folder and you'll see a rudimentary connection handler.
 
-#### Ship it!
+### Ship it!
 
 From the terminal run `npx serverless deploy`. Within a couple of minutes you should have a WebSocket API created under API Gateway, and a Lambda deployed to handle connection events.
 
 If you inspect your API using the [aws cli](https://aws.amazon.com/cli/) by running `aws apigatewayv2 get-apis`, the `ProtocolType` should confirm it is indeed a WebSocket API.
 
-#### Let's connect!
+### Let's connect!
 
 Using the endpoint printed to the console when you deployed with Serverless, try establishing a WebSocket connection with `wscat`:
 
