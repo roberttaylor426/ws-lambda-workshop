@@ -2,7 +2,7 @@
 
 ### TL;DR
 
-Install `wscat` (`npm i -g wscat`). Checkout branch `exercise-1`. Have fun!
+Install `wscat` (`npm i -g wscat`). Clone this repo. Checkout branch `exercise-1`. Have fun!
 
 ### Overview
 
