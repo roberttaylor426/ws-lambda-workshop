@@ -52,6 +52,6 @@ Using the endpoint printed to the console when you deployed with Serverless, try
 
 ```wscat -c wss://<your-api-id>.execute-api.eu-west-1.amazonaws.com/dev```
 
-If everything worked, you should see a message telling you you've connected. Good job!
+If everything worked, you should see a message telling you you've connected. Good job! :clap:
 
 (If you try to send a message from the WebSocket client you'll receive an error. We'll address that in the next exercise).
