@@ -44,7 +44,7 @@ Take a look inside `connection.ts` under the `src` folder and you'll see a rudim
 
 From the terminal run `npx serverless deploy`. Within a couple of minutes you should have a WebSocket API created under API Gateway, and a Lambda deployed to handle connection events.
 
-If you inspect your API using the [aws cli](https://aws.amazon.com/cli/) by running `aws apigatewayv2 get-apis`, the `ProtocolType` should confirm it is indeed a WebSocket API.
+If you inspect your API with the [aws cli](https://aws.amazon.com/cli/) by running `aws apigatewayv2 get-apis`, the `ProtocolType` should confirm it is indeed a WebSocket API.
 
 ### Let's connect!
 
@@ -54,4 +54,4 @@ Using the endpoint printed to the console when you deployed with Serverless, try
 
 If everything worked, you should see a message telling you you've connected. Good job!
 
-(If you try to send a message from the WebSocket client you'll receive an error. We'll address that in a later exercise).
+(If you try to send a message from the WebSocket client you'll receive an error. We'll address that in the next exercise).
