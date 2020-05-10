@@ -64,6 +64,22 @@
 						![Overview diagram](ws-api-gateway-lambda.png)
 					</textarea>
 				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## Things to consider
+
+						* Broken connections (browser, network infra, API Gateway all love to tear down idle connections)
+						<!-- .element: class="fragment" -->
+						  * Consider heartbeats
+						<!-- .element: class="fragment" -->
+						* Lambda cold starts
+						<!-- .element: class="fragment" -->
+						  * Design your solution to tolerate slow networks
+						<!-- .element: class="fragment" -->
+						* Patchy support in local AWS emulation envs
+						<!-- .element: class="fragment" -->
+					</textarea>
+				</section>
 			</div>
 		</div>
 
