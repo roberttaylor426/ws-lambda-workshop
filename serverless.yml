@@ -3,12 +3,31 @@ service: ws-lambda-workshop
 plugins:
     - serverless-webpack
 
+custom:
+    connectionsTableName: ChatConnections
+
 provider:
     name: aws
     runtime: nodejs12.x
     region: eu-west-1
     memorySize: 128
     websocketsApiName: ws-lambda-workshop-api
+    iamRoleStatements:
+        -   Effect: Allow
+            Action:
+                - dynamodb:BatchGetItem
+                - dynamodb:DeleteItem
+                - dynamodb:GetItem
+                - dynamodb:PutItem
+                - dynamodb:Query
+                - dynamodb:UpdateItem
+                - dynamodb:Scan
+            Resource:
+                Fn::GetAtt:
+                    - ConnectionsDynamoDBTable
+                    - Arn
+    environment:
+        CONNECTIONS_TABLE_NAME: ${self:custom.connectionsTableName}
 
 functions:
     onConnect:
@@ -19,3 +38,17 @@ functions:
         handler: src/connection.onMessage
         events:
             -   websocket: $default
+
+resources:
+    Resources:
+        ConnectionsDynamoDBTable:
+            Type: AWS::DynamoDB::Table
+            Properties:
+                TableName: ${self:custom.connectionsTableName}
+                AttributeDefinitions:
+                    -   AttributeName: ConnectionId
+                        AttributeType: S
+                KeySchema:
+                    -   AttributeName: ConnectionId
+                        KeyType: HASH
+                BillingMode: PAY_PER_REQUEST

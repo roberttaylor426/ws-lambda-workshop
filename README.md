@@ -1,49 +1,31 @@
 # WebSockets Lambda Workshop
 
-### Exercise 2: There and back again
+### Exercise 3: Hosting a WebSockets party
 
-In this exercise we'll send a message from our WebSocket client, and then echo the message back to the client with a Lambda.
+In this exercise we'll evolve our solution into a full-blown WhatsApp killer, relaying messages sent by one client to all other clients connected to the WebSocket API.
 
 ![Exercise diagram](exercise-diagram.png)
 
-#### Sending the message from the client
+#### Storing connection ids
 
-This we can already do. In the previous exercise we established a WebSocket connection; to send a message over that connection with `wscat` we just need to enter the message at the prompt.
+Since Lambdas are stateless we need to store the connection id each time a connection is established. We'll store that state in [DynamoDB](https://aws.amazon.com/dynamodb/).
 
-#### Routing messages
-
-In the previous exercise we encountered WebSocket API [routes](https://docs.aws.amazon.com/apigateway/latest/developerguide/websocket-api-develop-routes.html). In this exercise we'll use the `$default`<sup>*</sup> route to direct all non-connect notifications to a new handler.
+New infrastructure configuration has been added to our `serverless.yml`, creating a DynamoDB table and giving our Lambdas permissions to write to and query that table.
 
 #### Over to you
 
-See if you can update our `serverless.yml` to route `$default` traffic to our `connection.onMessage` handler.
+Update our `connection.onConnect` handler to store the connection id each time a client connects (a helper function has been provided to write the value to DynamoDB).
 
-If you were to `npx serverless deploy` now, you should find that it is possible to send messages from the `wscat` client without error.
+#### Route messages to every connection
 
-#### Identifying the connection
-
-At any given time a WebSocket API could be maintaining multiple open connections.
-
-![Multiple connections diagram](multiple-connections-diagram.png)
-
-In order for our Lambda to send a message to the right recipient, we need to tell API Gateway which connection we want it to forward the message on to.
-
-API Gateway makes the unique id for a connection available in the request context whenever a Lambda is triggered by a WebSocket event.
+All that remains to be done is to update our logic handling messages sent by clients. Instead of echoing the message back to the sender, we need to fetch the connection ids stored in DynamoDB and for each one instruct API Gateway to post that message onto the corresponding WebSocket connection.
 
 #### Over to you
 
-Take a look at our `onMessage` handler. Can you have it echo messages back to the client?
+Update `connection.onMessage` so that it sends the message to all clients connected to our WebSocket API. A helper function has been provided to fetch the connection ids of connected WebSocket clients.
 
-There's a predefined `initApiGatewayManagementApi` function that might be useful. These [docs](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/ApiGatewayManagementApi.html#postToConnection-property) should also help.
-
-(Don't forget `AWS.Request` instances [require a call to `.promise()`](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/using-promises.html) to start the underlying service call).
+N.B. since we're not handling client disconnects yet, be prepared for `postToConnection` calls to error with status code `410` `GONE`. This is what API Gateway will return if a connection is no longer connected.
 
 #### Ship it!
 
-Once you're done, try redeploying everything (`npx serverless deploy`).
-
-Next time you try sending a message with `wscat`, you should see it echoed back to you!
-
-Nice work writing to the right connection - that was a rite of passage! :grimacing:
-
-<sup>*</sup>In practice we probably wouldn't use the `$default` route for this, we'd more likely set up a [custom route](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-routes-integrations.html#apigateway-websocket-api-routes-about-custom) using a [route selection expression](https://docs.aws.amazon.com/apigateway/latest/developerguide/websocket-api-develop-routes.html#apigateway-websocket-api-route-selection-expressions).
+Try redeploying (`npx serverless deploy`) then start two separate `wscat` connections. If all went well, messages sent from one `wscat` session should also be printed out on the other!
