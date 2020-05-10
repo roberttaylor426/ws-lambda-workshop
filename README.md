@@ -1,31 +1,35 @@
-# WebSockets Lambda Workshop
+## WebSocket Lambda Workshop
 
-### Exercise 2: Send messages from our Lambda back to the WebSocket client
+###TL;DR
 
-In this exercise we'll send a message from our Lambda back to the WebSocket client.
+Install `wscat` (`npm i -g wscat`). Checkout branch `exercise-1`. Have fun!
 
-![Exercise diagram](exercise-diagram.png)
+### Overview
 
-#### Identifying the connection
+This workshop comprises 3 exercises. Each exercise is available on a separate branch.
 
-At any given time a WebSocket API could be maintaining multiple open connections.
+By the end of the workshop we'll have deployed a [Lambda](https://aws.amazon.com/lambda/) -powered backend that allows clients to communicate with one another in real-time using [WebSockets](https://en.wikipedia.org/wiki/WebSocket).  
 
-![Multiple connections diagram](multiple-connections-diagram.png)
+![Workshop diagram](workshop-diagram.png)
 
-In order for our Lambda to send a message to the right recipient, we need to tell API Gateway which connection we want it to forward the message on to.
+### Target audience
 
-API Gateway makes the unique id for a connection available in the request context whenever a Lambda is triggered by a WebSocket event.
+The code samples in the exercise are written in [Typescript](https://www.typescriptlang.org/).
 
-#### Over to you
+This workshop will make use of but not explain:
 
-Take a look at our existing `onConnect` handler. At the moment a client connects, can you send them back a greeting?
+ * [AWS API Gateway](https://aws.amazon.com/api-gateway/)
+ * [AWS Lambda](https://aws.amazon.com/lambda/)
+ * [AWS DynamoDb](https://aws.amazon.com/dynamodb/)
+ 
+A basic understanding of these technologies is assumed.
 
-There's an `initApiGatewayManagementApi` function that might be useful, these [docs](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/ApiGatewayManagementApi.html#postToConnection-property) should also help.
+### Prerequisites
 
-#### Ship it!
+Before starting this workshop be sure to have the following installed:
 
-Once you're done, try redeploying your Lambda by running `npx serverless deploy`.
-
-This time when you use `wscat` to connect, you should see your welcome message.
-
-Writing to the right connection - that was a rite of passage!
+ * A recent version of [Node](https://nodejs.org/en/) (this workshop was developed and tested with 12.x)
+ * [wscat](https://www.npmjs.com/package/wscat) (or another WebSocket client) installed. `npm install -g wscat` will get you up and running
+ * [aws cli](https://aws.amazon.com/cli/)
+ 
+We'll be deploying to AWS, so be sure to have an account available and the bill payer's permission!
