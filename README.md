@@ -27,7 +27,7 @@ A basic understanding of these technologies is assumed.
 
 ### Prerequisites
 
-Before starting this workshop be sure to have the following installed:
+Before starting this workshop you'll need the following installed:
 
  * A recent version of [Node](https://nodejs.org/en/) (this workshop was developed and tested with 12.x)
  * [wscat](https://www.npmjs.com/package/wscat) (or another WebSocket client) installed. `npm install -g wscat` will get you up and running
