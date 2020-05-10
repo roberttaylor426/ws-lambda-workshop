@@ -40,7 +40,7 @@ Our `onConnect` Lambda configuration tells API Gateway that when a WebSocket cli
 
 Take a look inside `connection.ts` under the `src` folder and you'll see a rudimentary connection handler.
 
-### Ship it!
+### Ship it! :shipit:
 
 From the terminal run `npx serverless deploy`. Within a couple of minutes you should have a WebSocket API created under API Gateway, and a Lambda deployed to handle connection events.
 
