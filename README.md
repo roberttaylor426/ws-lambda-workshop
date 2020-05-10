@@ -10,7 +10,7 @@ This we can already do. In the previous exercise we established a WebSocket conn
 
 ### Routing messages
 
-In the previous exercise we encountered WebSocket API [routes](https://docs.aws.amazon.com/apigateway/latest/developerguide/websocket-api-develop-routes.html). In this exercise we'll use the `$default`<sup>1</sup> route to direct all non-connect notifications to a new handler.
+In the previous exercise we encountered WebSocket API [routes](https://docs.aws.amazon.com/apigateway/latest/developerguide/websocket-api-develop-routes.html). In this exercise we'll use the `$default` route to direct all non-connect notifications to a new handler<sup>1</sup>.
 
 ### Over to you
 
