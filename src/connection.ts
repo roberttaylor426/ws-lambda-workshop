@@ -9,18 +9,28 @@ export const onConnect: APIGatewayProxyHandler = async (
         `Connecting! (connection id: ${event.requestContext.connectionId})`
     );
 
+    await storeConnectionId(event.requestContext.connectionId);
+
     return emptyOkResponse;
 };
 
 export const onMessage: APIGatewayProxyHandler = async (
     event: APIGatewayProxyEvent
 ) => {
-    console.log(`Received message! (message: ${event.body})`)
+    console.log(`Received message! (message: ${event.body})`);
 
-    await initApiGatewayManagementApi(event).postToConnection({
-        ConnectionId: event.requestContext.connectionId || '',
-        Data: event.body || ''
-    }).promise();
+    const connectionIds = await fetchStoredConnectionIds();
+    for (const connectionId of connectionIds) {
+        try {
+            await initApiGatewayManagementApi(event).postToConnection({
+                ConnectionId: connectionId,
+                Data: event.body || ''
+            }).promise();
+        } catch (e) {
+            // Connection was likely stale.
+            // If the status code was 410 we should consider removing it from our data store.
+        }
+    }
 
     return emptyOkResponse;
 };
