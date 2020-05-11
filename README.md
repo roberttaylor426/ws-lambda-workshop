@@ -54,6 +54,6 @@ Using the endpoint printed to the console when you deployed with Serverless, try
 
 If everything worked, you should see a message telling you you've connected. Good job! :clap:
 
-(If you try to send a message from the WebSocket client you'll receive an error. We'll address that in the next exercise).
+If you try to send a message from the WebSocket client you'll receive an error. We'll address that in the next exercise.
 
-Commit or discard your changes at this point, and checkout `exercise-2`.
+Commit or discard your changes, and checkout `exercise-2`.
