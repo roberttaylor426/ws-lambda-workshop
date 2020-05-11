@@ -1,6 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyHandler } from 'aws-lambda';
 import { ApiGatewayManagementApi } from 'aws-sdk';
-import { DocumentClient } from 'aws-sdk/lib/dynamodb/document_client';
+import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 
 export const onConnect: APIGatewayProxyHandler = async (
     event: APIGatewayProxyEvent
