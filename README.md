@@ -33,4 +33,4 @@ Before starting this workshop you'll need the following installed:
  * [wscat](https://www.npmjs.com/package/wscat) (or another WebSocket client) installed. `npm install -g wscat` will get you up and running
  * [aws cli](https://aws.amazon.com/cli/)
  
-We'll be deploying to AWS, so be sure to have an account configured and the bill payer's permission!
+We'll be deploying to AWS, so be sure to have your account configured locally and the bill payer's permission!
