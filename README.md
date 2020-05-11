@@ -22,7 +22,7 @@ All that remains to be done is to update our logic handling messages sent by cli
 
 Update `connection.onMessage` so that it sends the message to all clients connected to our WebSocket API. A helper function has been provided to fetch the connection ids of connected WebSocket clients.
 
-N.B. since we're not handling client disconnects yet, be prepared for `postToConnection` calls to error with status code `410` `GONE`. This is what API Gateway will return if a connection is no longer connected.
+N.B. since we're not handling client disconnects yet, be prepared for `postToConnection` calls to throw an error with status code `410` `GONE`. This is what API Gateway will return if a connection is no longer connected.
 
 ### Ship it! :shipit:
 
