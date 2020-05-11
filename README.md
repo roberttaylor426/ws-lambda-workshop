@@ -32,9 +32,11 @@ API Gateway makes the unique id for a connection available in the request contex
 
 Take a look at our `onMessage` handler. Can you have it echo messages back to the client?
 
-There's a predefined `initApiGatewayManagementApi` function that might be useful. These [docs](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/ApiGatewayManagementApi.html#postToConnection-property) should also help.
+The class provided by the AWS SDK for communicating with API Gateway is [ApiGatewayManagementApi](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/ApiGatewayManagementApi.html).
 
-(Don't forget `AWS.Request` instances [require a call to `.promise()`](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/using-promises.html) to start the underlying service call).
+There's a predefined `initApiGatewayManagementApi` function in `connection.ts` that might be useful.
+
+(When interfacing with `ApiGatewayManagementApi`, don't forget that if you omit the callback `AWS.Request` instances [require a call to `.promise()`](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/using-promises.html) to start the underlying service call).
 
 ### Ship it! :shipit:
 
