@@ -25,7 +25,9 @@ export const onMessage: APIGatewayProxyHandler = async (
     return emptyOkResponse;
 };
 
-const storeConnectionId = async (connectionId: string) => {
+const storeConnectionId = async (connectionId: string | undefined) => {
+    if (!connectionId) return;
+
     const documentClient = new DocumentClient({
         region: process.env.AWS_REGION
     });
