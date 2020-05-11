@@ -16,7 +16,7 @@ Start by adding a `websocketsApiName` entry to the provider declaration:
 websocketsApiName: ws-lambda-workshop-api
 ```
 
-This simply tells Serverless that you want API Gateway to provision a [WebSocket API](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api.html).
+This simply tells [Serverless](https://www.serverless.com/) that you want API Gateway to provision a [WebSocket API](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api.html).
 
 Next add the following Lambda definition under `functions`:
 
