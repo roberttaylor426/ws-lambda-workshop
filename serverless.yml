@@ -4,7 +4,7 @@ plugins:
     - serverless-webpack
 
 custom:
-    connectionsTableName: ChatConnections-${file(author.json):name}
+    connectionsTableName: ws-lambda-workshop-connections-${file(author.json):name}
 
 provider:
     name: aws
