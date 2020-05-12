@@ -1,4 +1,4 @@
-service: ws-lambda-workshop
+service: ws-lambda-workshop-${file(author.json):name}
 
 plugins:
     - serverless-webpack

@@ -8,12 +8,20 @@ In this exercise we'll enable [WebSocket](https://en.wikipedia.org/wiki/WebSocke
 
 From the terminal run `npm ci` to install project dependencies.
 
+Next create a file called `author.json` in the project root with the following content:
+
+```json
+{ "name": "<your-id>" }
+```
+
+If you're running this exercise with others, and deploying to the same AWS account, ensure your id is unique to prevent deployed resources from clashing.
+
 Next navigate to our barebones `serverless.yml` file in the project root.
 
 Start by adding a `websocketsApiName` entry to the provider declaration:
 
 ```yaml
-websocketsApiName: ws-lambda-workshop-api
+websocketsApiName: ws-lambda-workshop-api-${file(author.json):name}
 ```
 
 This simply tells [Serverless](https://www.serverless.com/) that you want API Gateway to provision a [WebSocket API](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api.html).
@@ -56,4 +64,4 @@ If everything worked, you should see a message telling you you've connected. Goo
 
 If you try to send a message from the WebSocket client you'll receive an error. We'll address that in the next exercise.
 
-Commit or discard your changes, and checkout `exercise-2`.
+Commit or discard your changes, then checkout `exercise-2`.
