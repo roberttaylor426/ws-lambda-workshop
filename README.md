@@ -11,10 +11,10 @@ From the terminal run `npm ci` to install project dependencies.
 Next create a file called `author.json` in the project root with the following content:
 
 ```json
-{ "name": "<your-id>" }
+{ "name": "<your-name>" }
 ```
 
-If you're running this exercise with others, and deploying to the same AWS account, ensure your id is unique to prevent deployed resources from clashing.
+If you're running this exercise with others and deploying to the same AWS account, ensure your chosen name is unique to prevent deployed resources from clashing.
 
 Next navigate to our barebones `serverless.yml` file in the project root.
 
