@@ -8,7 +8,7 @@ Install `wscat` (`npm i -g wscat`). Clone this repo. Checkout branch `exercise-1
 
 This workshop comprises 3 exercises. Each exercise is available on a separate branch.
 
-By the end of the workshop we'll have deployed a [Lambda](https://aws.amazon.com/lambda/) -powered backend that allows clients to communicate with one another in real-time using [WebSockets](https://en.wikipedia.org/wiki/WebSocket).  
+By the end of the workshop we'll have deployed a [Lambda](https://aws.amazon.com/lambda/)-powered backend that allows clients to communicate with one another in real-time using [WebSockets](https://en.wikipedia.org/wiki/WebSocket).  
 
 ![Workshop diagram](workshop-diagram.png)
 
