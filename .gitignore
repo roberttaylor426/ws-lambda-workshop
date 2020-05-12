@@ -1,4 +1,5 @@
 .idea
 .serverless
 node_modules
-lib
+author.json
+
