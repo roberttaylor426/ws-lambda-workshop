@@ -6,7 +6,7 @@ In this exercise we'll enable [WebSocket](https://en.wikipedia.org/wiki/WebSocke
 
 ### Getting up and running
 
-From the terminal run `npm ci` to install project dependencies.
+From the terminal run `npm install` to install project dependencies.
 
 Next create a file called `author.json` in the project root with the following content:
 
